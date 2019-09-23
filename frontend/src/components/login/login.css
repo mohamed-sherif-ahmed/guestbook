@@ -1,0 +1,13 @@
+.login-form {
+    text-align: right;
+}
+
+.form-entry {
+    display: inline-block;
+    margin: 15px;
+}
+
+.login-banner {
+    margin: 10px;
+    background-color: aliceblue;
+}
