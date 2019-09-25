@@ -1,9 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const  path = require('path');
+const path = require('path');
 const app = express();
 const apiRouter = require('./routes/api');
+const morgan = require('morgan');
+const cors = require('cors');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/api', apiRouter);
 
