@@ -1,9 +1,10 @@
 FROM node:10.16-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
-COPY . .
+RUN npm i -g nodemon
+# COPY . .
 EXPOSE 3001
-CMD [ "npm", "start" ]
+CMD [ "nodemon", "index.js" ]
