@@ -1,13 +1,23 @@
 .login-form {
-    text-align: right;
+    text-align: center;
+    
 }
 
 .form-entry {
-    display: inline-block;
+    display: block;
     margin: 15px;
+}
+.form-entry h2 {
+    margin: 25px;
+}
+
+.form-entry input {
+    width: 80%;
+    height: 25px;
 }
 
 .login-banner {
-    margin: 10px;
+    margin: auto;
     background-color: aliceblue;
+    width: 40%;
 }
