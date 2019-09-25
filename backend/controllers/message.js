@@ -1,22 +1,34 @@
 const Message = require('./../models/message');
+const User = require('./../models/user');
 
 module.exports = {
     addMessage: (req, res, next) => {
-        let newMessage = new Category({owner: req.decoded, text: req.body.text});
+        console.log("USER ID", req.decoded);
+        let newMessage = new Message({owner: req.decoded.userID, text: req.body.text});
         newMessage.save()
         .then((mes) => {
-            res.status(201).json(mes);
+            User.findById(mes.owner).exec().then(usr => {
+                console.log("inside void", usr);
+                var m = mes.toJSON();
+                m.owner = {name: usr.name};
+                res.status(201).json(m);
+            });
         })
         .catch((err) => {
             next(err);
         });
     },
     editMessage: (req, res, next) => {
-        const id = req.body._id;
+        console.log("BOOOOD", req.body);
+        const id = req.body.id;
         const updatedFields = req.body.updates;
-        Message.findOneAndUpdate({_id: id}, {$set: updatedFields}).exec()
+        console.log("EDELOOO", updatedFields)
+        Message.findById(id).exec()
         .then((doc) => {
-            res.status(200).json(doc);
+            doc.text = updatedFields.text;
+            doc.save().then(msg => {
+                res.status(200).json(msg);
+            });
         })
         .catch((err) => {
             next(err);
@@ -32,7 +44,10 @@ module.exports = {
         });
     },
     getMessages: (req, res, next) => {
-        Message.find().exec()
+        Message.find().populate({
+            path: 'owner',
+            select: 'name -_id'
+        }).exec()
         .then((messages) => {
             res.status(200).json(messages);
         })

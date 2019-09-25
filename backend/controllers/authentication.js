@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('./../models/user');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     generateToken: (req, res, next) => {
@@ -40,6 +41,7 @@ module.exports = {
         }
     },
     addUser: (req, res, next) => {
+        console.log(req.body);
         var newUser = new User({name: req.body.name, email: req.body.email});
         newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
         newUser.save()
