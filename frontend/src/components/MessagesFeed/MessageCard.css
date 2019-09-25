@@ -1,0 +1,30 @@
+.card {
+    background-color: aquamarine;
+    padding: 25px;
+    margin: auto;
+    margin-top: 10px;
+    width: 75%;
+}
+
+.card-actions {
+    display: block;
+    text-align: right;
+}
+
+.card-actions label {
+    padding-right: 15px;
+}
+
+.card-actions label:hover {
+    text-decoration: underline;
+}
+
+.content-username {
+    font-weight: bold;
+    padding-right: 15px;
+}
+
+.reply-content {
+    padding-top: 5px;
+    padding-left: 50px;
+}
